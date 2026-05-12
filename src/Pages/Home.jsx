@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 function Home() {
     const nav = useNavigate();
-    const navConsole = () =>{
-        nav('/console');
-    }
+  const handleconsole = () =>{
+    nav('/console')
+  }
   return (
     <div className="bg-light" style={{ minHeight: '100vh' }}>
       {/* Navigation */}
@@ -15,10 +15,6 @@ function Home() {
           <Navbar.Brand href="#home" className="fw-bold text-primary">
             Stripe<span className="text-dark">Fetcher</span>
           </Navbar.Brand>
-          <Nav className="ms-auto">
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#how-it-works">How it Works</Nav.Link>
-          </Nav>
         </Container>
       </Navbar>
 
@@ -27,9 +23,9 @@ function Home() {
         <Container className="py-5">
           <Row className="align-items-center">
             <Col lg={6}>
-              <Badge bg="primary-subtle" text="primary" className="mb-3 px-3 py-2 border border-primary-subtle">
+              {/* <Badge bg="primary-subtle" text="primary" className="mb-3 px-3 py-2 border border-primary-subtle">
                 Beta: Reconciliation Engine
-              </Badge>
+              </Badge> */}
               <h1 className="display-4 fw-bold mb-4">
                 Fetch Stripe Data <br /> 
                 <span className="text-primary">Without the Code.</span>
@@ -39,7 +35,7 @@ function Home() {
                 No database, no storage—just your API key and the data you need.
               </p>
               <div className="d-grid d-md-flex gap-3">
-                <Button variant="primary" size="lg" className="px-5" onClick={navConsole()}>Launch Fetcher</Button>
+                <Button variant="primary" size="lg" className="px-5" onClick={handleconsole}>Launch Fetcher</Button>
                 <Button variant="light" size="lg" className="px-5 border">View Repo</Button>
               </div>
             </Col>
@@ -114,7 +110,7 @@ function Home() {
                 <p className="mb-0 opacity-75">Connect your Stripe Restricted Key and start analyzing in seconds.</p>
               </Col>
               <Col md={4} className="text-md-end mt-4 mt-md-0">
-                <Button variant="light" size="lg" className="fw-bold text-primary px-4">Get Started Now</Button>
+                <Button variant="light" size="lg" className="fw-bold text-primary px-4" onClick={handleconsole}>Get Started Now</Button>
               </Col>
             </Row>
           </div>
@@ -126,7 +122,6 @@ function Home() {
         <Container className="text-center">
           <p className="text-muted mb-0 small">
             © {new Date().getFullYear()} StripeFetcher. Not affiliated with Stripe, Inc. 
-            Built for developers and finance teams.
           </p>
         </Container>
       </footer>

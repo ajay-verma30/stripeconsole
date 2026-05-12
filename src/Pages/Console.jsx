@@ -104,7 +104,6 @@ function Console() {
                       />
                       <Button variant="dark" type="submit" className="px-3">Save</Button>
                     </InputGroup>
-                    {isKeySaved && <small className="text-success">Key encrypted in session storage</small>}
                   </Form.Group>
                 </Form>
               </Card.Body>
