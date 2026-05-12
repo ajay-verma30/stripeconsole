@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Button, Card, Navbar, Nav, Form, Badge } from 'react-bootstrap';
+import { Container, Row, Col, Button, Card, Navbar,Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 function Home() {
