@@ -1,68 +1,70 @@
 import React from "react";
-import {
-  Table,
-  Card,
-} from "react-bootstrap";
+import { Table, Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { normalizeStripeObject } from "../utils/normalizeObjects";
 
 function DataTable({ data }) {
-  if (!data || data.length === 0) {
+  const navigate = useNavigate();
+
+  const normalizedData = (data || [])
+    .filter(Boolean)
+    .map(normalizeStripeObject);
+
+  const columns =
+    normalizedData.length > 0 ? Object.keys(normalizedData[0]) : [];
+
+  if (!normalizedData || normalizedData.length === 0) {
     return (
       <Card className="shadow-sm mt-4">
         <Card.Body className="text-center text-muted">
-          No data available
+          No valid data to display
         </Card.Body>
       </Card>
     );
   }
 
-  // Extract table columns dynamically
-  const columns = Object.keys(data[0]);
+  const handleClick = (row) => {
+    navigate(`/details/${row.id}`, {
+      state: row,
+    });
+  };
 
   return (
     <Card className="shadow-sm mt-4">
       <Card.Body>
         <div className="table-responsive">
-          <Table
-            striped
-            bordered
-            hover
-          >
+          <Table striped bordered hover>
             <thead>
               <tr>
                 {columns.map((col) => (
-                  <th key={col}>
-                    {col}
-                  </th>
+                  <th key={col}>{col}</th>
                 ))}
               </tr>
             </thead>
 
             <tbody>
-              {data.map(
-                (item, index) => (
-                  <tr key={index}>
-                    {columns.map(
-                      (col) => (
-                        <td key={col}>
-                          {typeof item[
-                            col
-                          ] === "object"
-                            ? JSON.stringify(
-                                item[
-                                  col
-                                ]
-                              )
-                            : String(
-                                item[
-                                  col
-                                ]
-                              )}
-                        </td>
-                      )
-                    )}
-                  </tr>
-                )
-              )}
+              {data.map((item, index) => (
+                <tr key={index}>
+                  {columns.map((col) => (
+                    <td key={col}>
+                      {col === "id" ? (
+                        <span
+                          onClick={() => handleClick(item)}
+                          style={{
+                            color: "#0d6efd",
+                            cursor: "pointer",
+                            textDecoration: "underline",
+                          }}
+                        >
+                          {String(item[col])}
+                        </span>
+                      ) : (
+                        String(item[col])
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>
